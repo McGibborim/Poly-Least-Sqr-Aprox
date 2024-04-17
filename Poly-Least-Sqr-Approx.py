@@ -1,11 +1,12 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from scipy import linalg
+import matplotlib.pyplot as plt # Adds cool graph
+from scipy import linalg # Access to linear algebra functions
 
+# Main function for calculations and what not
 def main():
     n = int(input("Enter the degree of the approximating polynomial P(x): ")) # Degree of the approximating polynomial P(x)
-    x = np.array(input("Enter the x-values separated by spaces: ").split(), float) # x-values
-    y = np.array(input("Enter the y-values separated by spaces: ").split(), float) # y-values (actual)
+    x = np.array(input("Enter the x-values separated by spaces (3 points minimum): ").split(), float) # x-values
+    y = np.array(input("Enter the y-values separated by spaces (3 points minimum): ").split(), float) # y-values (actual)
     xs, xy = get_system_of_equations(x, y, n)  # Get the system of equations
     xs = np.reshape(xs, ((n + 1), (n + 1)))  # Reshape the matrix xs to solve the system of equations
     xy = np.reshape(xy, ((n + 1), 1))
@@ -16,6 +17,7 @@ def main():
     print("\nE =", error)
     plot(x, y, fn(x, a))  # Plot the data points and the approximating function P(x)
 
+# Computes the values required to construct the system of equations for polynomial least-squares approximation.
 def get_system_of_equations(x, y, n):
     xs = np.array([])  # Summation of x-values
     xy = np.array([])  # Product of x- and y-values
@@ -27,15 +29,18 @@ def get_system_of_equations(x, y, n):
         xy = np.append(xy, ty)
     return xs, xy
 
+# This function calculates the error of the polynomial approximation.
 def find_error(y, fn):
     return np.sum((y - fn)**2)  # E = \sum_{i=1}^{m} (y_{i} - P(x_{i}))**2
 
+# Evaluates function.
 def fn(x, a):
     px = 0
     for index in range(0, np.size(a)):
         px += (a[index] * (x**index))  # Evaluate the P(x)
     return px
 
+# This function plots the data points (x, y) and the approximating polynomial curve P(x).
 def plot(x, y, fn):
     plt.figure(figsize=(8, 6), dpi=80)
     plt.subplot(1, 1, 1)
