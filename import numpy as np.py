@@ -1,5 +1,5 @@
 import numpy as np
-import pylab as pl
+import matplotlib.pylot as plt
 from scipy import linalg
 
 def main():
@@ -37,13 +37,13 @@ def fn(x, a):
     return px
 
 def plot(x, y, fn):
-    pl.figure(figsize=(8, 6), dpi=80)
-    pl.subplot(1, 1, 1)
-    pl.plot(x, y, color='blue', linewidth=2.0, linestyle='-', label='y')
-    pl.plot(x, fn, color='red', linewidth=3.0, linestyle='--', label='P(x)')
-    pl.legend(loc='upper left')
-    pl.grid()
-    pl.show()
+    plt.figure(figsize=(8, 6), dpi=80)
+    plt.subplot(1, 1, 1)
+    plt.plot(x, y, color='blue', linewidth=2.0, linestyle='-', label='y')
+    plt.plot(x, fn, color='red', linewidth=3.0, linestyle='--', label='P(x)')
+    plt.legend(loc='upper left')
+    plt.grid()
+    plt.show()
 
 if __name__ == '__main__':
     main()
