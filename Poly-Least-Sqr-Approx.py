@@ -3,9 +3,9 @@ import matplotlib.pyplot as plt
 from scipy import linalg
 
 def main():
-    n = 3  # Degree of the approximating polynomial P(x)
-    x = np.array([0, 0.25, 0.5, 0.75, 1.0], float)  # x-values
-    y = np.array([1, 1.284, 1.6487, 2.117, 2.7183], float)  # y-values (actual)
+    n = int(input("Enter the degree of the approximating polynomial P(x): ")) # Degree of the approximating polynomial P(x)
+    x = np.array(input("Enter the x-values separated by spaces: ").split(), float) # x-values
+    y = np.array(input("Enter the y-values separated by spaces: ").split(), float) # y-values (actual)
     xs, xy = get_system_of_equations(x, y, n)  # Get the system of equations
     xs = np.reshape(xs, ((n + 1), (n + 1)))  # Reshape the matrix xs to solve the system of equations
     xy = np.reshape(xy, ((n + 1), 1))
