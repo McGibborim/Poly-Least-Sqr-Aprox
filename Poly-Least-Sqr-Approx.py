@@ -7,15 +7,19 @@ def main():
     n = int(input("Enter the degree of the approximating polynomial P(x): ")) # Degree of the approximating polynomial P(x)
     x = np.array(input("Enter the x-values separated by spaces (3 points minimum): ").split(), float) # x-values
     y = np.array(input("Enter the y-values separated by spaces (3 points minimum): ").split(), float) # y-values (actual)
-    xs, xy = get_system_of_equations(x, y, n)  # Get the system of equations
-    xs = np.reshape(xs, ((n + 1), (n + 1)))  # Reshape the matrix xs to solve the system of equations
-    xy = np.reshape(xy, ((n + 1), 1))
-    print(xs, '\n\n', xy)
-    a = np.linalg.solve(xs, xy)  # Solve the system of equations
-    print('\n', a)  # Print the solution to the system of equations
-    error = find_error(y, np.array(fn(x, a)))  # Determine the error of P(x)
-    print("\nE =", error)
-    plot(x, y, fn(x, a))  # Plot the data points and the approximating function P(x)
+    if len(x) < 3 or len(y) < 3:
+        print("Whoops, you entered less than 3 points for the x values or the y values.\nTry again.\n")
+        main()
+    else:
+        xs, xy = get_system_of_equations(x, y, n)  # Get the system of equations
+        xs = np.reshape(xs, ((n + 1), (n + 1)))  # Reshape the matrix xs to solve the system of equations
+        xy = np.reshape(xy, ((n + 1), 1))
+        print(xs, '\n\n', xy)
+        a = np.linalg.solve(xs, xy)  # Solve the system of equations
+        print('\n', a)  # Print the solution to the system of equations
+        error = find_error(y, np.array(fn(x, a)))  # Determine the error of P(x)
+        print("\nE =", error)
+        plot(x, y, fn(x, a))  # Plot the data points and the approximating function P(x)
 
 # Computes the values required to construct the system of equations for polynomial least-squares approximation.
 def get_system_of_equations(x, y, n):
