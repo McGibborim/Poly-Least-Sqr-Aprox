@@ -1,3 +1,8 @@
+##################################################
+# Poly-Least-Sqr-Approx.py
+# by Nate McClure, Nathan Stahl, and Trey Wilkins
+##################################################
+
 import numpy as np
 import matplotlib.pyplot as plt # Adds cool graph
 from scipy import linalg # Access to linear algebra functions
@@ -11,19 +16,19 @@ def main():
         print("Whoops, you entered less than 3 points for the x values or the y values.\nTry again.\n")
         main()
     else:
-        xs, xy = get_system_of_equations(x, y, n)  # Get the system of equations
+        xs, xy = get_system_of_equations(x, y, n)  # Pulls from definition get_system_of_equations
         xs = np.reshape(xs, ((n + 1), (n + 1)))  # Reshape the matrix xs to solve the system of equations
         xy = np.reshape(xy, ((n + 1), 1))
         print(xs, '\n\n', xy)
         a = np.linalg.solve(xs, xy)  # Solve the system of equations
         print('\n', a)  # Print the solution to the system of equations
-        error = find_error(y, np.array(fn(x, a)))  # Determine the error of P(x)
+        error = find_error(y, np.array(fn(x, a)))  # Pulls from definition find_error
         print("\nE =", error)
         plot(x, y, fn(x, a))  # Plot the data points and the approximating function P(x)
 
 # Computes the values required to construct the system of equations for polynomial least-squares approximation.
 def get_system_of_equations(x, y, n):
-    xs = np.array([])  # Summation of x-values
+    xs = np.array([])  # Sums x-values
     xy = np.array([])  # Product of x- and y-values
     for index in range(0, (n + 1)):
         for exp in range(0, (n + 1)):
